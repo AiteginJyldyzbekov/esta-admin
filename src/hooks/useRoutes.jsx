@@ -2,12 +2,14 @@ import { Grid } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import SideBar from "../components/sidebar/SideBar";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import NotFound from "../pages/NotFound/NotFound";
 
 const useRoutes = (isAuth) => {
   if (!isAuth) {
     return (
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="*" element={<NotFound />}/>
       </Routes>
     );
   }
