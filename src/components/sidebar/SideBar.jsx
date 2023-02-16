@@ -57,7 +57,7 @@ function SideBar() {
           >
             <ListItemButton>
               <ListItemIcon>
-                <Icon />
+                <Icon style={path === location.pathname ? {color: '#fff'}: {}} />
               </ListItemIcon>
               <ListItemText primary={title} />
             </ListItemButton>

@@ -2,7 +2,7 @@
 .wrapper {
     width: 100%;
     min-height: 100vh;
-    border-right: 2px solid rgb(96, 205, 255);
+    border-right: 2px solid #1976DE;
 }
 
 .logo {
@@ -13,6 +13,6 @@
 }
 
 .selected {
-    background: rgb(96, 205, 255) !important;
+    background: #1976DE !important;
     color: white;
 }
