@@ -2,28 +2,29 @@ import { useEffect, useMemo } from "react";
 import PageContainer from "../../components/containers/PageContainer";
 import TableContainer from "../../components/TableContainer/TableContainer";
 import { TableRow, TableCell } from "@mui/material";
-import TourTable from "../../components/tables/TourTable";
-import useTours from "../../hooks/useTours";
 import Preloader from "../../components/preloader/Preloader";
+import UseServices from "../../hooks/useWebServices";
+import OurTeamTable from "../../components/tables/OurTeamTable";
+import useTeam from "../../hooks/useTeam";
 
-function ToursPage() {
-  const { tours, getTours, isLoading } = useTours();
+function OurTeamPage() {
+  const { ourTeam, getTeam, isLoading } = useTeam();
 
   useEffect(() => {
-    getTours();
-  }, [getTours]);
+    getTeam();
+  }, [getTeam]);
 
   const renderList = useMemo(
-    () => tours.map((el) => <TourTable key={el.tid} {...el} />),
-    [tours]
+    () => ourTeam.map((el) => <OurTeamTable key={el.tid} {...el} />),
+    [ourTeam]
   );
 
   if (isLoading) return <Preloader full />;
   return (
     <PageContainer
-      title="Туры"
-      pathToAdd="/tour/create"
-      btnText={"+ Добавить тур"}
+      title="Services"
+      pathToAdd="/our-team/create"
+      btnText={"+ Добавить коллегу"}
     >
       <TableContainer
         isLoading={isLoading}
@@ -42,4 +43,4 @@ function ToursPage() {
   );
 }
 
-export default ToursPage;
+export default OurTeamPage;

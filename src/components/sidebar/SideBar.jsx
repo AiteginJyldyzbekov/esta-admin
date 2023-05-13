@@ -5,11 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-
 import CommuteIcon from "@mui/icons-material/Commute";
-import DirectionsSubwayIcon from "@mui/icons-material/DirectionsSubway";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../../firebase/firebase";
@@ -17,23 +13,48 @@ import { logout } from "../../firebase/firebase";
 const links = [
   {
     path: "/",
-    title: "Туры",
+    title: "Услуги по web разработке ",
     Icon: CommuteIcon,
   },
   {
-    path: "/transport",
-    title: "Транспорты",
-    Icon: DirectionsSubwayIcon,
+    path: "/designService",
+    title: "Услуги по ux/ui design ",
+    Icon: CommuteIcon,
   },
   {
-    path: "/partners",
-    title: "Партнеры",
-    Icon: HandshakeIcon,
+    path: "/mobileService",
+    title: "Услуги по мобильной разработке ",
+    Icon: CommuteIcon,
   },
   {
-    path: "/call",
-    title: "Колл центр",
-    Icon: AddIcCallIcon,
+    path: "/mvpService",
+    title: "Услуги по разработке MVP",
+    Icon: CommuteIcon,
+  },
+  {
+    path: "/chatService",
+    title: "Услуги по разработке чатов",
+    Icon: CommuteIcon,
+  },
+  {
+    path: "/technologies",
+    title: "Технологии",
+    Icon: CommuteIcon,
+  },
+  {
+    path: "/feedback",
+    title: "Отзывы",
+    Icon: CommuteIcon,
+  },
+  {
+    path: "/our-team",
+    title: "Коллектив",
+    Icon: CommuteIcon,
+  },
+  {
+    path: "/projects",
+    title: "Проекты",
+    Icon: CommuteIcon,
   },
 ];
 
@@ -44,7 +65,7 @@ function SideBar() {
   }
   return (
     <div className={css.wrapper}>
-      <div className={css.logo}>Ак-Жол</div>
+      <div className={css.logo}>Solid devs</div>
       <List>
         {links.map(({ path, title, Icon }) => (
           <ListItem
@@ -57,7 +78,7 @@ function SideBar() {
           >
             <ListItemButton>
               <ListItemIcon>
-                <Icon style={path === location.pathname ? {color: '#fff'}: {}} />
+                <Icon style={path === location.pathname ? { color: '#fff' } : {}} />
               </ListItemIcon>
               <ListItemText primary={title} />
             </ListItemButton>

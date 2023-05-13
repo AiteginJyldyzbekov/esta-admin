@@ -1,25 +1,24 @@
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { collection } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCe4puT9EFcz5BGa75xjipJmhUTxTZKFIk",
-  authDomain: "ak-jol.firebaseapp.com",
-  projectId: "ak-jol",
-  storageBucket: "ak-jol.appspot.com",
-  messagingSenderId: "448099531547",
-  appId: "1:448099531547:web:00967b7a42b777f95c31be",
-  measurementId: "G-N8LCBZTPX3",
+  apiKey: "AIzaSyCMzzgwkcEXF6WhvYZE0_5eszWn2T7ywk0",
+  authDomain: "solid-devs.firebaseapp.com",
+  projectId: "solid-devs",
+  storageBucket: "solid-devs.appspot.com",
+  messagingSenderId: "927044977766",
+  appId: "1:927044977766:web:bcfe3d999c8aca0b7399a7",
+  measurementId: "G-PT47ZEP0XF"
 };
 
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
+export const storage = getStorage(app)
 
 export const login = async (e, p) => {
   await signInWithEmailAndPassword(auth, e, p)

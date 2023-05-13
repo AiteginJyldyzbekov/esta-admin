@@ -5,17 +5,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 
-const TourTable = ({ tid, name, duration, ...props }) => {
+const TechnologiesTable = ({ tid, name, duration, ...props }) => {
   const onDelete = async (e) => {
     e.stopPropagation();
     const res = window?.confirm("Вы действительно хотите удалить тур " + name + '?');
     if (res) {
-      await deleteDoc(doc(db, "tours", tid));
+      await deleteDoc(doc(db, "technologies", tid));
       window?.location?.reload()
     }
   };
   return (
-    <TableCellContainer path={`/tour/${tid}`}>
+    <TableCellContainer path={`/technologies/${tid}`}>
       <TableCell component="th" scope="row">
         {tid}
       </TableCell>
@@ -31,4 +31,4 @@ const TourTable = ({ tid, name, duration, ...props }) => {
     </TableCellContainer>
   );
 };
-export default TourTable;
+export default TechnologiesTable;
