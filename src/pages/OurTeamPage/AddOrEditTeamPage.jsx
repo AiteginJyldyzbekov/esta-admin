@@ -14,7 +14,7 @@ import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import UseServices from "../../hooks/useWebServices";
 import useTeam from "../../hooks/useTeam";
-
+import Preloader from "../../components/preloader/Preloader";
 
 function AddOrEditTeamPage() {
   const { addTeam, isLoading, error } = useTeam();
@@ -28,6 +28,7 @@ function AddOrEditTeamPage() {
 
   const [mainUrl, setMainUrl] = useState()
   const [mainImg, setMainImg] = useState();
+  const [isMainImg, setIsMainImg] = useState(false)
 
   const handleMainImg = (target) => {
     if (target.files[0]) {
@@ -37,10 +38,12 @@ function AddOrEditTeamPage() {
 
   useMemo(() => {
     if (mainUrl) {
+      setIsMainImg(true)
       const imageRef = ref(storage, mainUrl.name)
       uploadBytes(imageRef, mainUrl).then(() => {
         getDownloadURL(imageRef).then((url) => {
           setMainImg(url)
+          setIsMainImg(false)
         }).catch((error) => {
           console.log(error.message, "error")
         })
@@ -94,7 +97,7 @@ function AddOrEditTeamPage() {
               <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />
             </Button>
           </div>
-          {mainImg && <img src={mainImg} alt="Main image" width={150} />}
+          <div className="inputs">{isMainImg ? <Preloader /> : mainImg && <img src={mainImg} alt="Main image" width={150} />}</div>
           <div className="inputs">
             <Button type="submit" variant="contained">
               Сохранить

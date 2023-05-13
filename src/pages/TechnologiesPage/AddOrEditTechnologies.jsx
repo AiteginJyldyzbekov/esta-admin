@@ -13,7 +13,7 @@ import { Grid } from "@mui/material";
 import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import useTechnologies from "../../hooks/useTechnologies";
-
+import Preloader from "../../components/preloader/Preloader";
 
 function AddOrEditTechnologies() {
   const { addTechnologies, isLoading, error } = useTechnologies();
@@ -25,6 +25,7 @@ function AddOrEditTechnologies() {
 
   const [mainUrl, setMainUrl] = useState()
   const [mainImg, setMainImg] = useState();
+  const [isMainImg, setIsMainImg] = useState(false)
 
   const handleMainImg = (target) => {
     if (target.files[0]) {
@@ -34,10 +35,12 @@ function AddOrEditTechnologies() {
 
   useMemo(() => {
     if (mainUrl) {
+      setIsMainImg(true)
       const imageRef = ref(storage, mainUrl.name)
       uploadBytes(imageRef, mainUrl).then(() => {
         getDownloadURL(imageRef).then((url) => {
           setMainImg(url)
+          setIsMainImg(false)
         }).catch((error) => {
           console.log(error.message, "error")
         })
@@ -88,7 +91,7 @@ function AddOrEditTechnologies() {
               <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />
             </Button>
           </div>
-          {mainImg && <img src={mainImg} alt="Main image" width={150} />}
+          <div className="inputs">{isMainImg ? <Preloader /> : mainImg && <img src={mainImg} alt="Main image" width={150} />}</div>
           <div className="inputs">
             <Button type="submit" variant="contained">
               Сохранить

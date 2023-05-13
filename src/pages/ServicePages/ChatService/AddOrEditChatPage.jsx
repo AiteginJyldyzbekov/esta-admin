@@ -13,7 +13,7 @@ import { Grid } from "@mui/material";
 import { storage } from "../../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import UseChatService from "../../../hooks/useChatService";
-
+import Preloader from "../../../components/preloader/Preloader";
 
 function AddOrEditChatPage() {
   const { addService, isLoading, error } = UseChatService()
@@ -27,6 +27,7 @@ function AddOrEditChatPage() {
   const [serviceDesc, setServiceDesc] = useState()
   const [serviceUrl, setServiceUrl] = useState()
   const [serviceImg, setServiceImg] = useState();
+  const [isServiceImg, setIsServiceImg] = useState(false);
 
   const [processData, setProcessData] = useState([])
   const [processTitle, setprocessTitle] = useState()
@@ -34,6 +35,7 @@ function AddOrEditChatPage() {
 
   const [mainUrl, setMainUrl] = useState()
   const [mainImg, setMainImg] = useState();
+  const [isMainImg, setIsMainImg] = useState(false)
 
   const [isSending, setSending] = useState(false);
 
@@ -51,10 +53,12 @@ function AddOrEditChatPage() {
 
   useMemo(() => {
     if (mainUrl) {
+      setIsMainImg(true)
       const imageRef = ref(storage, mainUrl.name)
       uploadBytes(imageRef, mainUrl).then(() => {
         getDownloadURL(imageRef).then((url) => {
           setMainImg(url)
+          setIsMainImg(false)
         }).catch((error) => {
           console.log(error.message, "error")
         })
@@ -67,10 +71,12 @@ function AddOrEditChatPage() {
 
   useMemo(() => {
     if (serviceUrl) {
+      setIsServiceImg(true)
       const imageRef = ref(storage, serviceUrl.name)
       uploadBytes(imageRef, serviceUrl).then(() => {
         getDownloadURL(imageRef).then((url) => {
           setServiceImg(url)
+          setIsServiceImg(false)
         }).catch((error) => {
           console.log(error.message, "error")
         })
@@ -146,8 +152,8 @@ function AddOrEditChatPage() {
               Upload main image
               <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />
             </Button>
-            {mainImg && <img src={mainImg} alt="Main image" width={150} />}
           </div>
+          <div className="inputs">{isMainImg ? <Preloader /> : mainImg && <img src={mainImg} alt="Main image" width={150} />}</div>
           <Grid sx={{
             width: '60%'
           }}>
@@ -184,7 +190,7 @@ function AddOrEditChatPage() {
                 Save
               </Button>
             </div>
-            {serviceImg && <img src={serviceImg} alt="service image" width={150} />}
+            {isServiceImg ? <Preloader /> : serviceImg && <img src={serviceImg} alt="service image" width={150} />}
           </Grid>
           <Grid sx={{
             width: '60%'
