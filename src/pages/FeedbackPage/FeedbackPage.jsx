@@ -17,6 +17,7 @@ function FeedbackPage() {
   const renderList = useMemo(
     () => feedbacks.map((el) => <FeedbackTable key={el.tid} {...el} />),
     [feedbacks]
+    
   );
 
   if (isLoading) return <Preloader full />;

@@ -25,75 +25,18 @@ function AddOrEditMvpPage() {
   const [serviceData, setServiceData] = useState([]);
   const [serviceTitle, setServiceTitle] = useState()
   const [serviceDesc, setServiceDesc] = useState()
-  const [serviceUrl, setServiceUrl] = useState()
-  const [serviceImg, setServiceImg] = useState();
-  const [isServiceImg, setIsServiceImg] = useState(false);
 
   const [processData, setProcessData] = useState([])
   const [processTitle, setprocessTitle] = useState()
   const [processDesc, setProcessDesc] = useState()
 
-  const [mainUrl, setMainUrl] = useState()
-  const [mainImg, setMainImg] = useState();
-  const [isMainImg, setIsMainImg] = useState(false)
-
   const [isSending, setSending] = useState(false);
-
-  const handleServiceImg = (target) => {
-    if (target.files[0]) {
-      setServiceUrl(target.files[0]);
-    }
-  };
-
-  const handleMainImg = (target) => {
-    if (target.files[0]) {
-      setMainUrl(target.files[0]);
-    }
-  };
-
-  useMemo(() => {
-    if (mainUrl) {
-      setIsMainImg(true)
-      const imageRef = ref(storage, mainUrl.name)
-      uploadBytes(imageRef, mainUrl).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-          setMainImg(url)
-          setIsMainImg(false)
-        }).catch((error) => {
-          console.log(error.message, "error")
-        })
-        setMainImg(null)
-      }).catch((error) => {
-        console.log(error.message, "error")
-      })
-    }
-  }, [mainUrl])
-
-  useMemo(() => {
-    if (serviceUrl) {
-      setIsServiceImg(true)
-      const imageRef = ref(storage, serviceUrl.name)
-      uploadBytes(imageRef, serviceUrl).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-          setServiceImg(url)
-          setIsServiceImg(false)
-        }).catch((error) => {
-          console.log(error.message, "error")
-        })
-        setServiceImg(null)
-      }).catch((error) => {
-        console.log(error.message, "error")
-      })
-    }
-  }, [serviceUrl])
 
   const saveServices = () => {
     setServiceData([...serviceData, {
       title: serviceTitle,
       description: serviceDesc,
-      image: serviceImg,
     }])
-    setServiceImg("")
     setServiceTitle("")
     setServiceDesc("")
   }
@@ -116,7 +59,6 @@ function AddOrEditMvpPage() {
       description: description,
       services: serviceData,
       process: processData,
-      image: mainImg
     })
       .finally(() => {
         setSending(false);
@@ -148,12 +90,7 @@ function AddOrEditMvpPage() {
               }}
               required
             />
-            <Button variant="contained" component="label">
-              Upload main image
-              <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />
-            </Button>
           </div>
-          <div className="inputs">{isMainImg ? <Preloader /> : mainImg && <img src={mainImg} alt="Main image" width={150} />}</div>
           <Grid sx={{
             width: '60%'
           }}>
@@ -180,17 +117,12 @@ function AddOrEditMvpPage() {
                   width: '100%'
                 }}
               />
-              <Button variant="contained" component="label">
-                Upload services image
-                <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleServiceImg(e.target)} />
-              </Button>
               <Button variant="contained" component="label" sx={{
                 width: '100%',
               }} onClick={saveServices} >
                 Save
               </Button>
             </div>
-            {isServiceImg ? <Preloader /> : serviceImg && <img src={serviceImg} alt="service image" width={150} />}
           </Grid>
           <Grid sx={{
             width: '60%'

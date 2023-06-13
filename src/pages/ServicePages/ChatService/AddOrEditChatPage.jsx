@@ -25,75 +25,22 @@ function AddOrEditChatPage() {
   const [serviceData, setServiceData] = useState([]);
   const [serviceTitle, setServiceTitle] = useState()
   const [serviceDesc, setServiceDesc] = useState()
-  const [serviceUrl, setServiceUrl] = useState()
-  const [serviceImg, setServiceImg] = useState();
-  const [isServiceImg, setIsServiceImg] = useState(false);
 
   const [processData, setProcessData] = useState([])
   const [processTitle, setprocessTitle] = useState()
-  const [processDesc, setProcessDesc] = useState()
 
-  const [mainUrl, setMainUrl] = useState()
-  const [mainImg, setMainImg] = useState();
-  const [isMainImg, setIsMainImg] = useState(false)
+  const [advantage, setAdvantage] = useState()
+  const [advantageArr, setAdvantageArr] = useState([])
+
+  const [statistik, setStatistick] = useState()
 
   const [isSending, setSending] = useState(false);
-
-  const handleServiceImg = (target) => {
-    if (target.files[0]) {
-      setServiceUrl(target.files[0]);
-    }
-  };
-
-  const handleMainImg = (target) => {
-    if (target.files[0]) {
-      setMainUrl(target.files[0]);
-    }
-  };
-
-  useMemo(() => {
-    if (mainUrl) {
-      setIsMainImg(true)
-      const imageRef = ref(storage, mainUrl.name)
-      uploadBytes(imageRef, mainUrl).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-          setMainImg(url)
-          setIsMainImg(false)
-        }).catch((error) => {
-          console.log(error.message, "error")
-        })
-        setMainImg(null)
-      }).catch((error) => {
-        console.log(error.message, "error")
-      })
-    }
-  }, [mainUrl])
-
-  useMemo(() => {
-    if (serviceUrl) {
-      setIsServiceImg(true)
-      const imageRef = ref(storage, serviceUrl.name)
-      uploadBytes(imageRef, serviceUrl).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-          setServiceImg(url)
-          setIsServiceImg(false)
-        }).catch((error) => {
-          console.log(error.message, "error")
-        })
-        setServiceImg(null)
-      }).catch((error) => {
-        console.log(error.message, "error")
-      })
-    }
-  }, [serviceUrl])
 
   const saveServices = () => {
     setServiceData([...serviceData, {
       title: serviceTitle,
       description: serviceDesc,
-      image: serviceImg,
     }])
-    setServiceImg("")
     setServiceTitle("")
     setServiceDesc("")
   }
@@ -101,10 +48,10 @@ function AddOrEditChatPage() {
   const saveProcceses = () => {
     setProcessData([...processData, {
       title: processTitle,
-      description: processDesc,
+      statistik
     }])
+    setStatistick("")
     setprocessTitle("")
-    setProcessDesc("")
   }
 
   const submit = (e) => {
@@ -116,7 +63,7 @@ function AddOrEditChatPage() {
       description: description,
       services: serviceData,
       process: processData,
-      image: mainImg
+      advantage: advantageArr
     })
       .finally(() => {
         setSending(false);
@@ -148,12 +95,7 @@ function AddOrEditChatPage() {
               }}
               required
             />
-            <Button variant="contained" component="label">
-              Upload main image
-              <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />
-            </Button>
           </div>
-          <div className="inputs">{isMainImg ? <Preloader /> : mainImg && <img src={mainImg} alt="Main image" width={150} />}</div>
           <Grid sx={{
             width: '60%'
           }}>
@@ -180,17 +122,39 @@ function AddOrEditChatPage() {
                   width: '100%'
                 }}
               />
-              <Button variant="contained" component="label">
-                Upload services image
-                <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleServiceImg(e.target)} />
-              </Button>
               <Button variant="contained" component="label" sx={{
                 width: '100%',
               }} onClick={saveServices} >
                 Save
               </Button>
             </div>
-            {isServiceImg ? <Preloader /> : serviceImg && <img src={serviceImg} alt="service image" width={150} />}
+            <Grid>
+              <Typography variant="h4" sx={{
+                marginTop: '50px',
+                marginBottom: '20px',
+              }}>{`Преимущества. ${advantageArr.length != 0 ? advantageArr.length : ''}`}</Typography>
+              <Grid sx={{
+                display: 'flex'
+              }}>
+                <TextField
+                  onChange={(e) => setAdvantage(e.target.value)}
+                  label="Title"
+                  variant="outlined"
+                  value={advantage}
+                  sx={{
+                    width: '60%'
+                  }}
+                />
+                <Button variant="contained" component="label" sx={{
+                  width: '30%',
+                }} onClick={() => {
+                  setAdvantageArr([...advantageArr, advantage])
+                  setAdvantage("")
+                }} >
+                  Save
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid sx={{
             width: '60%'
@@ -198,7 +162,7 @@ function AddOrEditChatPage() {
             <Typography variant="h4" sx={{
               marginTop: '50px',
               marginBottom: '20px',
-            }}>{`Процесс. ${processData.length != 0 ? processData.length : ""}`}</Typography>
+            }}>{`Статистика. ${processData.length != 0 ? processData.length : ""}`}</Typography>
             <div className="inputs">
               <TextField
                 onChange={(e) => setprocessTitle(e.target.value)}
@@ -210,10 +174,10 @@ function AddOrEditChatPage() {
                 }}
               />
               <TextField
-                onChange={(e) => setProcessDesc(e.target.value)}
-                label="Description"
+                onChange={(e) => setStatistick(e.target.value)}
+                label="Статистика"
                 variant="outlined"
-                value={processDesc}
+                value={statistik}
                 sx={{
                   width: '100%'
                 }}

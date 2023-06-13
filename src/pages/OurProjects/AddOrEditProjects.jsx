@@ -30,6 +30,8 @@ function AddOrEditProjectPage() {
   const [mainImg, setMainImg] = useState();
   const [isMainImg, setIsMainImg] = useState(false)
 
+  const [link, setLink] = useState();
+
   const handleMainImg = (target) => {
     if (target.files[0]) {
       setMainUrl(target.files[0]);
@@ -67,6 +69,7 @@ function AddOrEditProjectPage() {
       companyName,
       companyDesc,
       tasks,
+      link,
       image: mainImg
     })
       .finally(() => {
@@ -94,6 +97,14 @@ function AddOrEditProjectPage() {
             <TextField
               onChange={(e) => setCompanyDesc(e.target.value)}
               label="Company description"
+              variant="outlined"
+              sx={{
+                width: '100%'
+              }}
+            />
+            <TextField
+              onChange={(e) => setLink(e.target.value)}
+              label="Website link"
               variant="outlined"
               sx={{
                 width: '100%'

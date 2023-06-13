@@ -1,7 +1,9 @@
 import {
-  Button,
+  Select,
   TextField,
-  TextareaAutosize,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +16,8 @@ import { storage } from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import useTechnologies from "../../hooks/useTechnologies";
 import Preloader from "../../components/preloader/Preloader";
+import Button from "@mui/material/Button";
+import { technologiesData } from "../../constants/technologies";
 
 function AddOrEditTechnologies() {
   const { addTechnologies, isLoading, error } = useTechnologies();
@@ -80,12 +84,31 @@ function AddOrEditTechnologies() {
               onChange={(e) => setTitle(e.target.value)}
               required
             />
-            <TextField
+            {/* <TextField
               label="Category"
               variant="outlined"
               onChange={(e) => setCategory(e.target.value)}
               required
-            />
+            /> */}
+            <FormControl>
+              <InputLabel id="demo-multiple-chip-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {technologiesData.map((item, index) => {
+                  return (
+                    <MenuItem
+                      key={index}
+                      value={item}
+                    >
+                      {item}
+                    </MenuItem>
+                  )
+                })}
+              </Select>
+            </FormControl>
             <Button variant="contained" component="label">
               Upload main image
               <input hidden accept="image/*" multiple type="file" name="file" onChange={(e) => handleMainImg(e.target)} />

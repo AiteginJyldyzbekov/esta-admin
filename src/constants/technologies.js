@@ -1,0 +1,1 @@
+export const technologiesData = ['DevOps', 'Frontend', 'QA', 'Backend', 'Mobile', 'Infrastructure', 'UX/UI']
