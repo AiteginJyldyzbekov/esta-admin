@@ -30,6 +30,10 @@ function AddOrEditMvpPage() {
   const [processTitle, setprocessTitle] = useState()
   const [processDesc, setProcessDesc] = useState()
 
+  const [mvpTitle, setMvpTitle] = useState();
+  const [mvpDesc, setMvpDesc] = useState();
+  const [mvpArr, setMvpArr] = useState([])
+
   const [isSending, setSending] = useState(false);
 
   const saveServices = () => {
@@ -39,6 +43,15 @@ function AddOrEditMvpPage() {
     }])
     setServiceTitle("")
     setServiceDesc("")
+  }
+
+  const saveMvp = () => {
+    setMvpArr([...mvpArr, {
+      title: mvpTitle,
+      description: mvpDesc,
+    }])
+    setMvpTitle("")
+    setMvpDesc("")
   }
 
   const saveProcceses = () => {
@@ -59,6 +72,7 @@ function AddOrEditMvpPage() {
       description: description,
       services: serviceData,
       process: processData,
+      reasons: mvpArr
     })
       .finally(() => {
         setSending(false);
@@ -153,6 +167,39 @@ function AddOrEditMvpPage() {
               <Button variant="contained" component="label" sx={{
                 width: '100%',
               }} onClick={saveProcceses} >
+                Save
+              </Button>
+            </div>
+          </Grid>
+          <Grid sx={{
+            width: '60%'
+          }}>
+            <Typography variant="h4" sx={{
+              marginTop: '50px',
+              marginBottom: '20px',
+            }}>{`Зачем нужен MVP?. ${mvpArr.length != 0 ? mvpArr.length : ''}`}</Typography>
+            <div className="inputs">
+              <TextField
+                onChange={(e) => setMvpTitle(e.target.value)}
+                label="Title"
+                variant="outlined"
+                value={mvpTitle}
+                sx={{
+                  width: '100%'
+                }}
+              />
+              <TextField
+                onChange={(e) => setMvpDesc(e.target.value)}
+                label="Description"
+                variant="outlined"
+                value={mvpDesc}
+                sx={{
+                  width: '100%'
+                }}
+              />
+              <Button variant="contained" component="label" sx={{
+                width: '100%',
+              }} onClick={saveMvp} >
                 Save
               </Button>
             </div>
