@@ -13,47 +13,22 @@ import { logout } from "../../firebase/firebase";
 const links = [
   {
     path: "/",
-    title: "Услуги по web разработке ",
+    title: "Каталог ",
     Icon: CommuteIcon,
   },
   {
-    path: "/designService",
-    title: "Услуги по ux/ui design ",
+    path: "/product",
+    title: "Готовая продукция ",
     Icon: CommuteIcon,
   },
   {
-    path: "/mobileService",
-    title: "Услуги по мобильной разработке ",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/mvpService",
-    title: "Услуги по разработке MVP",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/chatService",
-    title: "Услуги по разработке чатов",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/technologies",
-    title: "Технологии",
+    path: "/news",
+    title: "Новости ",
     Icon: CommuteIcon,
   },
   {
     path: "/feedback",
-    title: "Отзывы",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/our-team",
-    title: "Коллектив",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/projects",
-    title: "Проекты",
+    title: "Отзывы ",
     Icon: CommuteIcon,
   },
 ];
@@ -65,7 +40,7 @@ function SideBar() {
   }
   return (
     <div className={css.wrapper}>
-      <div className={css.logo}>Solid devs</div>
+      <div className={css.logo}>Ago in style</div>
       <List>
         {links.map(({ path, title, Icon }) => (
           <ListItem

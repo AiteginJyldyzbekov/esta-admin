@@ -2,11 +2,7 @@ import React from 'react';
 import { TableRow } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  path?: string;
-  children: React.ReactNode;
-}
-const TableCellContainer: React.FC<Props> = ({ path, children }) => {
+const TableCellContainer = ({ path, children }) => {
   const navigate = useNavigate();
   return (
     <TableRow

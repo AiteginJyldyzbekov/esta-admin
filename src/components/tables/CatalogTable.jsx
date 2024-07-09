@@ -8,12 +8,12 @@ import { deleteObject } from "firebase/storage";
 import { ref } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 
-const FeedbackTable = ({ tid, name, images, duration, stars, desc, ...props }) => {
+const CatalogTable = ({ tid, title, images, desc, price, ...props }) => {
     const onDelete = async (e) => {
         e.stopPropagation();
-        const res = window?.confirm("Вы действительно хотите удалить отзыв " + name + '?');
+        const res = window?.confirm("Вы действительно хотите удалить продукт " + title + '?');
         if (res) {
-            await deleteDoc(doc(db, "feedback", tid)).then(() => {
+            await deleteDoc(doc(db, "catalog", tid)).then(() => {
                 if (images && images.length > 0) {
                     for (const image of images) {
                         deleteObject(ref(storage, image.url))
@@ -24,14 +24,14 @@ const FeedbackTable = ({ tid, name, images, duration, stars, desc, ...props }) =
         }
     };
     return (
-        <TableCellContainer path={`/feedback/${tid}`}>
+        <TableCellContainer path={`/catalog/${tid}`}>
             <TableCell component="th" scope="row">
-                {name}
+                {title}
             </TableCell>
 
             <TableCell scope="row">{desc}</TableCell>
-            <TableCell scope="row">{stars}</TableCell>
-            <TableCell scope="row">{<img width={"60px"} src={images[0].url} />}</TableCell>
+            <TableCell scope="row">{price}</TableCell>
+            <TableCell scope="row"><img width={"60px"} src={images[0].url} /></TableCell>
             <TableCell scope="row">
                 <IconButton onClick={onDelete}>
                     <DeleteIcon />
@@ -40,4 +40,4 @@ const FeedbackTable = ({ tid, name, images, duration, stars, desc, ...props }) =
         </TableCellContainer>
     );
 };
-export default FeedbackTable;
+export default CatalogTable;

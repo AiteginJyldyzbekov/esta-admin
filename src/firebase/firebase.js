@@ -5,13 +5,13 @@ import { collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMzzgwkcEXF6WhvYZE0_5eszWn2T7ywk0",
-  authDomain: "solid-devs.firebaseapp.com",
-  projectId: "solid-devs",
-  storageBucket: "solid-devs.appspot.com",
-  messagingSenderId: "927044977766",
-  appId: "1:927044977766:web:bcfe3d999c8aca0b7399a7",
-  measurementId: "G-PT47ZEP0XF"
+  apiKey: "AIzaSyCAlotyEn7gzF6kKwFl0eCBn56To_ExPDE",
+  authDomain: "fashion-admin-3dbe1.firebaseapp.com",
+  projectId: "fashion-admin-3dbe1",
+  storageBucket: "fashion-admin-3dbe1.appspot.com",
+  messagingSenderId: "185186706788",
+  appId: "1:185186706788:web:5903338a3f45b79b63c671",
+  measurementId: "G-MY7NTP5D6Y"
 };
 
 const app = initializeApp(firebaseConfig);

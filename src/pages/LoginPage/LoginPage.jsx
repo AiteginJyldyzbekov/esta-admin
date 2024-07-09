@@ -30,14 +30,14 @@ function LoginPage() {
           <TextField
             value={e}
             onChange={(e) => setE(e.target.value)}
-            id="outlined-basic"
+            id="outlined-basic1"
             label="Email"
             variant="outlined"
           />
           <TextField
             value={p}
             onChange={(e) => setP(e.target.value)}
-            id="outlined-basic"
+            id="outlined-basic2"
             label="Password"
             variant="outlined"
             type="password"

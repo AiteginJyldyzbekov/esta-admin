@@ -3,7 +3,6 @@ import PageContainer from "../../components/containers/PageContainer";
 import TableContainer from "../../components/TableContainer/TableContainer";
 import { TableRow, TableCell } from "@mui/material";
 import Preloader from "../../components/preloader/Preloader";
-import UseServices from "../../hooks/useWebServices";
 import FeedbackTable from "../../components/tables/FeedbackTable";
 import useFeedback from "../../hooks/useFeedback";
 
@@ -23,7 +22,7 @@ function FeedbackPage() {
   if (isLoading) return <Preloader full />;
   return (
     <PageContainer
-      title="Services"
+      title="Отзывы"
       pathToAdd="/feedback/create"
       btnText={"+ Добавить отзыв"}
     >
@@ -31,10 +30,10 @@ function FeedbackPage() {
         isLoading={isLoading}
         Header={
           <TableRow>
-            <TableCell>ID</TableCell>
             <TableCell>Имя</TableCell>
-            <TableCell>Транспорты</TableCell>
-            <TableCell>Длительность</TableCell>
+            <TableCell>Описание</TableCell>
+            <TableCell>Оценка</TableCell>
+            <TableCell>Картинка</TableCell>
             <TableCell />
           </TableRow>
         }
