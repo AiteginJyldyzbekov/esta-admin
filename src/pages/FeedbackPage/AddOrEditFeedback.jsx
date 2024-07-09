@@ -49,7 +49,7 @@ function AddOrEditFeedback() {
       })
       .then(() => {
         toast.success("Продукт был успешно создан!");
-        navigate("/");
+        navigate("/feedback");
       });
   }
 

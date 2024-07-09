@@ -173,7 +173,7 @@ import useProducts from "../../hooks/useProducts";
         })
         .then(() => {
           toast.success("Продукт был успешно создан!");
-          navigate("/");
+          navigate("/product");
         });
     }
   

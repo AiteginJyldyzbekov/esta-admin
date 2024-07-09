@@ -53,7 +53,7 @@ function AddOrEditNews() {
             })
             .then(() => {
                 toast.success("Новость была успешно создана!");
-                navigate("/");
+                navigate("/news");
             });
     }
 

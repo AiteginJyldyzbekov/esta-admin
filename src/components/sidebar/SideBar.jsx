@@ -7,7 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CommuteIcon from "@mui/icons-material/Commute";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/firebase";
 
 const links = [
@@ -35,8 +35,9 @@ const links = [
 
 function SideBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const onLogout = () => {
-    logout()
+    logout().then(() => navigate("/"))
   }
   return (
     <div className={css.wrapper}>
