@@ -22,6 +22,7 @@ import styled from 'styled-components';
 import { Select, MenuItem } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
+import createPrefixes from "../../components/createPrefix/createPrefix";
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -159,6 +160,7 @@ function AddOrEditCatalog() {
     e.preventDefault();
     if (isSending) return null;
     setSending(true);
+    
     addCatalog({
       title,
       desc,
@@ -166,7 +168,10 @@ function AddOrEditCatalog() {
       images: updatedImageData,
       colors,
       category: category,
-      size: size
+      size: size,
+      searchWords: [
+        ...createPrefixes(title),
+      ]
     })
       .finally(() => {
         setSending(false);
