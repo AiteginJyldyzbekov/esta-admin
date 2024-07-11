@@ -15,6 +15,9 @@ import ProductDetail from "../pages/ProductPage/ProductDetail";
 import NewsPage from "../pages/NewsPage/NewsPage";
 import AddOrEditNews from "../pages/NewsPage/AddOrEditNews";
 import NewsDetail from "../pages/NewsPage/NewsDetail";
+import AdPage from "../pages/AdPage/AdPage";
+import AddOrEditAd from "../pages/AdPage/AddOrEditAd";
+import AdDetailPage from "../pages/AdPage/AdDetailPage";
 
 const useRoutes = (isAuth) => {
   if (!isAuth) {
@@ -48,6 +51,10 @@ const useRoutes = (isAuth) => {
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/feedback/create" element={<AddOrEditFeedback />} />
           <Route path="/feedback/:id" element={<FeedbackDetailPage />} />
+
+          <Route path="/ad" element={<AdPage />} />
+          <Route path="/ad/create" element={<AddOrEditAd />} />
+          <Route path="/ad/:id" element={<AdDetailPage />} />
         </Routes>
       </Grid>
     </Grid>

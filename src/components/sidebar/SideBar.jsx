@@ -31,6 +31,11 @@ const links = [
     title: "Отзывы ",
     Icon: CommuteIcon,
   },
+  {
+    path: "/ad",
+    title: "Реклама ",
+    Icon: CommuteIcon,
+  },
 ];
 
 function SideBar() {

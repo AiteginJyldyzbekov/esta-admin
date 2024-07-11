@@ -32,7 +32,7 @@ const NewsTable = ({ tid, title, date, images, desc1, desc2, price, ...props }) 
 
             <TableCell scope="row">{desc1}</TableCell>
             <TableCell scope="row">{desc2}</TableCell>
-            <TableCell scope="row"><img width={"60px"} src={images[0].url} /></TableCell>
+            <TableCell scope="row">{<img width={"60px"} src={images[0]?.url ? images[0].url : ""} />}</TableCell>
             <TableCell scope="row">
                 <IconButton onClick={onDelete}>
                     <DeleteIcon />

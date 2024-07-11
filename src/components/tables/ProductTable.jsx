@@ -31,7 +31,7 @@ const ProductTable = ({ tid, title, images, desc, price, ...props }) => {
 
             <TableCell scope="row">{desc}</TableCell>
             <TableCell scope="row">{price}</TableCell>
-            <TableCell scope="row"><img width={"60px"} src={images[0].url} /></TableCell>
+            <TableCell scope="row">{<img width={"60px"} src={images[0]?.url ? images[0].url : ""} />}</TableCell>
             <TableCell scope="row">
                 <IconButton onClick={onDelete}>
                     <DeleteIcon />
