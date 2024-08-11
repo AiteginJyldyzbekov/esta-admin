@@ -98,6 +98,8 @@ function CatalogDetail() {
     const [currentColor, setCurrentColor] = useState('#fff');
 
     const [category, setCategory] = useState('');
+    const [type, setType] = useState('')
+
     const [size, setSize] = useState([]);
 
     const sizes = [
@@ -140,6 +142,10 @@ function CatalogDetail() {
 
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
+    };
+
+    const handleTypeChange = (event) => {
+        setType(event.target.value);
     };
 
     const handleImageChange = (index, target) => {
@@ -212,8 +218,9 @@ function CatalogDetail() {
             setPrice(catalogDetail?.price)
             setColors(catalogDetail?.colors)
             setCategory(catalogDetail?.category)
-            setSize(catalogDetail?.size)
+            setType(catalogDetail?.type)
             setImageData(catalogDetail?.images)
+            setSize(catalogDetail?.size)
         }
     }, [catalogDetail])
 
@@ -237,8 +244,9 @@ function CatalogDetail() {
             price,
             images: updatedImageData,
             category,
-            size,
+            type,
             colors,
+            size
         }
         updateCatalog(id, updatedData)
             .then(() => {
@@ -343,11 +351,9 @@ function CatalogDetail() {
                                 placeholder="Категория"
                                 sx={{ width: "100%" }}
                             >
-                                <MenuItem value="blazer">Жакет</MenuItem>
-                                <MenuItem value="costume">Костюм</MenuItem>
-                                <MenuItem value="jacket">Куртка</MenuItem>
-                                <MenuItem value="coat">Пальто</MenuItem>
-                                <MenuItem value="trenhc">Тренч</MenuItem>
+                                <MenuItem value="shirt">Футболка</MenuItem>
+                                <MenuItem value="longsliv">Лонгслив</MenuItem>
+                                <MenuItem value="switchot">Свитшот</MenuItem>
                             </Select>
                         </Grid>
                         <Grid sx={{ width: "100%" }}>
@@ -370,6 +376,20 @@ function CatalogDetail() {
                                         {size}
                                     </MenuItem>
                                 ))}
+                            </Select>
+                        </Grid>
+                        <Grid sx={{ width: "100%" }}>
+                            <InputLabel id="demo-multiple-name-label">Тип одежды</InputLabel>
+                            <Select
+                                labelId="category-label"
+                                value={type}
+                                onChange={handleTypeChange}
+                                label="Тип одежды"
+                                placeholder="Тип одежды"
+                                sx={{ width: "100%" }}
+                            >
+                                <MenuItem value="teens">Подростковая</MenuItem>
+                                <MenuItem value="children">Детская</MenuItem>
                             </Select>
                         </Grid>
                     </div>

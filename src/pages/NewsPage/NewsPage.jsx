@@ -21,19 +21,18 @@ function NewsPage() {
     if (isLoading) return <Preloader full />;
     return (
         <PageContainer
-            title="Новости"
+            title="Этапы"
             pathToAdd="/news/create"
-            btnText={"+ Добавить новости"}
+            btnText={"+ Добавить этапы"}
         >
             <TableContainer
                 isLoading={isLoading}
                 Header={
                     <TableRow>
-                        <TableCell>Заголовок</TableCell>
-                        <TableCell>Опсание #1</TableCell>
-                        <TableCell>Опиисание #2</TableCell>
-                        <TableCell>Картинка</TableCell>
-                        <TableCell />
+                        <TableCell>Вопрос</TableCell>
+                        <TableCell>Ответ</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell>Удалить</TableCell>
                     </TableRow>
                 }
                 Body={renderList}

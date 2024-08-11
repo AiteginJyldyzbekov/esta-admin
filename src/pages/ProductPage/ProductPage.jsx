@@ -21,20 +21,19 @@ function ProductPage() {
     if (isLoading) return <Preloader full />;
     return (
         <PageContainer
-            title="Готовая продукция"
+            title="Вопросы"
             pathToAdd="/product/create"
-            btnText={"+ Добавить продукт в готовую продукцию"}
+            btnText={"+ Добавить вопрос"}
         >
             <TableContainer
                 isLoading={isLoading}
                 Header={
                     <TableRow>
-                        <TableCell>Название</TableCell>
-                        <TableCell>Описание</TableCell>
-                        <TableCell>Цена</TableCell>
-                        <TableCell>Картинка</TableCell>
-                        <TableCell />
-                    </TableRow>
+                        <TableCell>Вопрос</TableCell>
+                        <TableCell>Ответ</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell>Удалить</TableCell>
+                </TableRow>
                 }
                 Body={renderList}
             />

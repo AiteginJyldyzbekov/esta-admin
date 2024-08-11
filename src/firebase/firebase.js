@@ -5,13 +5,12 @@ import { collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAlotyEn7gzF6kKwFl0eCBn56To_ExPDE",
-  authDomain: "fashion-admin-3dbe1.firebaseapp.com",
-  projectId: "fashion-admin-3dbe1",
-  storageBucket: "fashion-admin-3dbe1.appspot.com",
-  messagingSenderId: "185186706788",
-  appId: "1:185186706788:web:5903338a3f45b79b63c671",
-  measurementId: "G-MY7NTP5D6Y"
+  apiKey: "AIzaSyBXJ0E4HQRyYQB7AJDHYUS3v08TMVzUdSg",
+  authDomain: "esta-admin.firebaseapp.com",
+  projectId: "esta-admin",
+  storageBucket: "esta-admin.appspot.com",
+  messagingSenderId: "34767468512",
+  appId: "1:34767468512:web:f995bfa261707521821d85"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -5,7 +5,7 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormContainer from "../../components/containers/FormContainer";
@@ -23,6 +23,7 @@ import { Select, MenuItem } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import createPrefixes from "../../components/createPrefix/createPrefix";
+import useProducts from "../../hooks/useProducts";
 
 const Wrapper = styled.div`
   margin-top: 20px;
@@ -99,6 +100,8 @@ function AddOrEditCatalog() {
   const [currentColor, setCurrentColor] = useState('#fff');
 
   const [category, setCategory] = useState('');
+  const [type, setType] = useState('');
+
   const [size, setSize] = useState([]);
 
   const sizes = [
@@ -120,17 +123,12 @@ function AddOrEditCatalog() {
     },
   };
 
-  const handleSizeChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSize(
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
+  };
+
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
   };
 
 
@@ -160,7 +158,7 @@ function AddOrEditCatalog() {
     e.preventDefault();
     if (isSending) return null;
     setSending(true);
-    
+
     addCatalog({
       title,
       desc,
@@ -168,10 +166,8 @@ function AddOrEditCatalog() {
       images: updatedImageData,
       colors,
       category: category,
-      size: size,
-      searchWords: [
-        ...createPrefixes(title),
-      ]
+      type,
+      size
     })
       .finally(() => {
         setSending(false);
@@ -220,6 +216,15 @@ function AddOrEditCatalog() {
       }
     }
   }
+
+    const handleSizeChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSize(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
 
   const uploadImages = async (index) => {
     const item = imageData[index]
@@ -317,7 +322,7 @@ function AddOrEditCatalog() {
               }}
             />
             <Grid sx={{ width: "100%" }}>
-            <InputLabel id="demo-multiple-name-label">Категория</InputLabel>
+              <InputLabel id="demo-multiple-name-label">Категория</InputLabel>
               <Select
                 labelId="category-label"
                 value={category}
@@ -326,11 +331,9 @@ function AddOrEditCatalog() {
                 placeholder="Категория"
                 sx={{ width: "100%" }}
               >
-                <MenuItem value="blazer">Жакет</MenuItem>
-                <MenuItem value="costume">Костюм</MenuItem>
-                <MenuItem value="jacket">Куртка</MenuItem>
-                <MenuItem value="coat">Пальто</MenuItem>
-                <MenuItem value="trenhc">Тренч</MenuItem>
+                <MenuItem value="shirt">Футболка</MenuItem>
+                <MenuItem value="longsliv">Лонгслив</MenuItem>
+                <MenuItem value="switchot">Свитшот</MenuItem>
               </Select>
             </Grid>
             <Grid sx={{ width: "100%" }}>
@@ -353,6 +356,20 @@ function AddOrEditCatalog() {
                     {size}
                   </MenuItem>
                 ))}
+              </Select>
+            </Grid>
+            <Grid sx={{ width: "100%" }}>
+              <InputLabel id="demo-multiple-name-label">Тип одежды</InputLabel>
+              <Select
+                labelId="category-label"
+                value={type}
+                onChange={handleTypeChange}
+                label="Тип одежды"
+                placeholder="Тип одежды"
+                sx={{ width: "100%" }}
+              >
+                <MenuItem value="teens">Подростковая</MenuItem>
+                <MenuItem value="children">Детская</MenuItem>
               </Select>
             </Grid>
           </div>

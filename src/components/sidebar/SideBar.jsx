@@ -18,22 +18,12 @@ const links = [
   },
   {
     path: "/product",
-    title: "Готовая продукция ",
+    title: "Частые вопросы",
     Icon: CommuteIcon,
   },
   {
     path: "/news",
-    title: "Новости ",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/feedback",
-    title: "Отзывы ",
-    Icon: CommuteIcon,
-  },
-  {
-    path: "/ad",
-    title: "Реклама ",
+    title: "Этапы ",
     Icon: CommuteIcon,
   },
 ];
@@ -46,7 +36,7 @@ function SideBar() {
   }
   return (
     <div className={css.wrapper}>
-      <div className={css.logo}>Ago in style</div>
+      <div className={css.logo}>ESTA</div>
       <List>
         {links.map(({ path, title, Icon }) => (
           <ListItem
