@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/preloader/Preloader";
 import {
     TextField,
+    TextareaAutosize
 } from "@mui/material";
 import FormPageContainer from "../../components/containers/FormPageContainer";
 import FormContainer from "../../components/containers/FormContainer";
@@ -22,7 +23,7 @@ function ProductDetail() {
     useEffect(() => {
         if (productDetail) {
             setQuestion(productDetail?.question)
-            setAns(productDetail?.ans)
+            setAns(productDetail?.ans.replace(/\\n/g, '\n'));
         }
     }, [productDetail])
 
@@ -61,13 +62,18 @@ function ProductDetail() {
                                 width: '100%'
                             }}
                         />
-                        <TextField
+                        <TextareaAutosize
                             value={ans}
                             onChange={(e) => setAns(e.target.value)}
-                            label="Ответ"
-                            variant="outlined"
-                            sx={{
-                                width: '100%'
+                            placeholder="Описание"
+                            style={{
+                                width: '100%',
+                                minHeight: '100px',
+                                padding: '8px',
+                                borderRadius: '4px',
+                                borderColor: 'rgba(0, 0, 0, 0.23)',
+                                borderWidth: '1px',
+                                borderStyle: 'solid',
                             }}
                         />
                     </div>

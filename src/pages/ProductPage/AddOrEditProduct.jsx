@@ -22,6 +22,13 @@ function AddOrEditProduct() {
 
   const [isSending, setSending] = useState(false);
 
+  const handleTextAreaChange = (e) => {
+    const value = e.target.value;
+    // Заменяем переносы строк на специальные маркеры перед сохранением
+    const formattedText = value.replace(/\n/g, '\\n');
+    setAns(formattedText);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     if (isSending) return null;
@@ -52,12 +59,17 @@ function AddOrEditProduct() {
                 width: '100%'
               }}
             />
-            <TextField
-              onChange={(e) => setAns(e.target.value)}
-              label="Ответ"
-              variant="outlined"
-              sx={{
-                width: '100%'
+            <TextareaAutosize
+              onChange={handleTextAreaChange}
+              placeholder="Описание"
+              style={{
+                width: '100%',
+                minHeight: '100px',
+                padding: '8px',
+                borderRadius: '4px',
+                borderColor: 'rgba(0, 0, 0, 0.23)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
               }}
             />
           </div>

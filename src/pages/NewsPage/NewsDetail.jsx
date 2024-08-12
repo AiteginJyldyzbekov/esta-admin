@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Preloader from "../../components/preloader/Preloader";
 import {
     TextField,
+    TextareaAutosize
 } from "@mui/material";
 import FormPageContainer from "../../components/containers/FormPageContainer";
 import FormContainer from "../../components/containers/FormContainer";
@@ -21,10 +22,11 @@ function NewsDetail() {
 
     useEffect(() => {
         if (newsDetail) {
-            setQuestion(newsDetail?.question)
-            setAns(newsDetail?.ans)
+            setQuestion(newsDetail?.question);
+            // Преобразуем \\n обратно в \n для корректного отображения в TextareaAutosize
+            setAns(newsDetail?.ans.replace(/\\n/g, '\n'));
         }
-    }, [newsDetail])
+    }, [newsDetail]);
 
     useEffect(() => {
         if (id) {
@@ -36,7 +38,7 @@ function NewsDetail() {
         e.preventDefault();
         const updatedData = {
             question,
-            ans
+            ans // Сохраняем как есть, без преобразований
         }
         updateNews(id, updatedData)
             .then(() => {
@@ -61,13 +63,18 @@ function NewsDetail() {
                                 width: '100%'
                             }}
                         />
-                        <TextField
+                        <TextareaAutosize
                             value={ans}
                             onChange={(e) => setAns(e.target.value)}
-                            label="Описание"
-                            variant="outlined"
-                            sx={{
-                                width: '100%'
+                            placeholder="Описание"
+                            style={{
+                                width: '100%',
+                                minHeight: '100px',
+                                padding: '8px',
+                                borderRadius: '4px',
+                                borderColor: 'rgba(0, 0, 0, 0.23)',
+                                borderWidth: '1px',
+                                borderStyle: 'solid',
                             }}
                         />
                     </div>
