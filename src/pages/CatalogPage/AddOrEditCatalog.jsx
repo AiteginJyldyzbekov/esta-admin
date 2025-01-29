@@ -105,6 +105,11 @@ function AddOrEditCatalog() {
   const [size, setSize] = useState([]);
 
   const sizes = [
+    "26",
+    "28",
+    "30",
+    "32",
+    "34",
     "36",
     "38",
     "40",

@@ -103,12 +103,17 @@ function CatalogDetail() {
     const [size, setSize] = useState([]);
 
     const sizes = [
+        "26",
+        "28",
+        "30",
+        "32",
+        "34",
         "36",
         "38",
         "40",
         "42",
         "44",
-    ]
+      ]
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
